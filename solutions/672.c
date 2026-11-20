@@ -1,19 +1,20 @@
 // 计算正弦函数：用相邻项的比值递推，避免单独计算大阶乘。
-#include <stdio.h>
+#include <stdio.h>  // 引入 scanf()、printf() 的声明。
 
-int main(void)
-{
-    int terms;
-    double x;
-    if (scanf("%d%lf", &terms, &x) != 2 || terms < 1) {
-        return 1;
-    }
+int main(void)  // 定义程序入口，void 表示该函数不接收参数。
+{  // 开始主函数的函数体。
+    int terms;  // terms 保存要累加的级数项数。
+    double x;  // x 保存要求正弦值的实数。
+    if (scanf("%d%lf", &terms, &x) != 2 || terms < 1) {  // 读取项数与 x，至少计算一项。
+        return 1;  // 输入读取或检查失败，返回非零退出状态。
+    }  // 结束当前条件分支。
 
-    double term = x, sum = x;
-    for (int i = 1; i < terms; ++i) {
+    double term = x, sum = x;  // 级数第一项就是 x，因此当前项与部分和都从 x 开始。
+    for (int i = 1; i < terms; ++i) {  // 第一项已计入，从下一项起迭代到指定的项数。
+        // 相邻项的符号相反，分子多乘 x²，阶乘分母多乘两个相邻整数。
         term *= -(x * x) / ((2.0 * i) * (2.0 * i + 1));
-        sum += term;
-    }
-    printf("%.4f\n", sum);
-    return 0;
-}
+        sum += term;  // 把新算出的这一项加到部分和中。
+    }  // 结束本层 for 循环。
+    printf("%.4f\n", sum);  // 输出求和结果，保留四位小数。
+    return 0;  // 返回 0，表示程序正常结束。
+}  // 主函数的函数体结束。

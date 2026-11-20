@@ -1,19 +1,19 @@
 // 跳一跳：连续跳到中心时，本次加分比上一次多 2。
-#include <stdio.h>
+#include <stdio.h>  // 引入 scanf()、printf() 的声明。
 
-int main(void)
-{
-    int jump, total = 0, center_score = 0;
-    while (scanf("%d", &jump) == 1 && jump != 0) {
-        if (jump == 2) {
-            center_score += 2;
-            total += center_score;
-        } else {
-            center_score = 0;
-            ++total;
-        }
-    }
+int main(void)  // 定义程序入口，void 表示该函数不接收参数。
+{  // 开始主函数的函数体。
+    int jump, total = 0, center_score = 0;  // 保存本次跳跃结果、累计分数和连续中心跳的加分。
+    while (scanf("%d", &jump) == 1 && jump != 0) {  // 每次读入一种跳跃结果，读到 0 表示游戏结束。
+        if (jump == 2) {  // 读到 2 表示本次跳到了方块中心。
+            center_score += 2;  // 连续命中中心时，本次得分在上次基础上加 2。
+            total += center_score;  // 将本次中心跳跃的得分累加到总分。
+        } else {  // 其余有效结果为 1，表示跳到了方块但未命中中心。
+            center_score = 0;  // 这次跳跃打断连击，把中心分数重置为 0。
+            ++total;  // 普通成功跳跃为总分加 1。
+        }  // 结束当前条件分支。
+    }  // 结束本层 while 循环。
 
-    printf("%d\n", total);
-    return 0;
-}
+    printf("%d\n", total);  // 输出所有跳跃结束后的累计分数。
+    return 0;  // 返回 0，表示程序正常结束。
+}  // 主函数的函数体结束。

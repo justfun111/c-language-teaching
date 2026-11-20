@@ -1,21 +1,22 @@
 // 阶梯电价计费：超出档位的电量才使用更高的单价。
-#include <stdio.h>
+#include <stdio.h>  // 引入 scanf()、printf() 的声明。
 
-int main(void)
-{
-    double usage, bill;
-    if (scanf("%lf", &usage) != 1) {
-        return 1;
-    }
+int main(void)  // 定义程序入口，void 表示该函数不接收参数。
+{  // 开始主函数的函数体。
+    double usage, bill;  // 用 double 保存可能含小数的用电量和电费。
+    if (scanf("%lf", &usage) != 1) {  // 用 %lf 读取 double 类型的用电量。
+        return 1;  // 输入读取或检查失败，返回非零退出状态。
+    }  // 结束当前条件分支。
 
-    if (usage <= 110) {
-        bill = usage * 0.50;
-    } else if (usage <= 210) {
-        bill = 110 * 0.50 + (usage - 110) * 0.55;
-    } else {
+    if (usage <= 110) {  // 用电量不超过 110 度时，全部按第一档计费。
+        bill = usage * 0.50;  // 每度按 0.50 元累加。
+    } else if (usage <= 210) {  // 用电量超过 110 度但未超过 210 度时，涉及前两档。
+        bill = 110 * 0.50 + (usage - 110) * 0.55;  // 先计入前 110 度的费用，再按 0.55 元计算超出部分。
+    } else {  // 超过 210 度时，三档费用都要计入。
+        // 前两档分别按满额计费，超过 210 度的部分按 0.70 元计费。
         bill = 110 * 0.50 + 100 * 0.55 + (usage - 210) * 0.70;
-    }
+    }  // 结束当前条件分支。
 
-    printf("%.2f\n", bill);
-    return 0;
-}
+    printf("%.2f\n", bill);  // 用 %.2f 把总电费输出到小数点后两位。
+    return 0;  // 返回 0，表示程序正常结束。
+}  // 主函数的函数体结束。

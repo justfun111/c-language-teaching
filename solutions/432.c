@@ -1,18 +1,18 @@
 // 整数位数计算：每除以 10 去掉一位，0 本身也有一位。
-#include <stdio.h>
+#include <stdio.h>  // 引入 scanf()、printf() 的声明。
 
-int main(void)
-{
-    int number;
-    if (scanf("%d", &number) != 1) {
-        return 1;
-    }
+int main(void)  // 定义程序入口，void 表示该函数不接收参数。
+{  // 开始主函数的函数体。
+    int number;  // number 用来保存并逐步缩短输入整数。
+    if (scanf("%d", &number) != 1) {  // 读入一个要统计位数的整数。
+        return 1;  // 输入读取或检查失败，返回非零退出状态。
+    }  // 结束当前条件分支。
 
-    int digits = 1;
-    while (number >= 10) {
-        number /= 10;
-        ++digits;
-    }
-    printf("%d\n", digits);
-    return 0;
-}
+    int digits = 1;  // 至少有一位，因此 0 到 9 都从 1 开始计数。
+    while (number >= 10) {  // 当前数还有两位或更多时，仍有末位可以去掉。
+        number /= 10;  // 对 10 做整数除法，丢掉原来的最低位。
+        ++digits;  // 每丢掉一位就把位数加 1。
+    }  // 结束本层 while 循环。
+    printf("%d\n", digits);  // 输出原整数的十进制位数。
+    return 0;  // 返回 0，表示程序正常结束。
+}  // 主函数的函数体结束。
